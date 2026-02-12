@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
+from routers import auth_router
+
 import time
 
 # ========================================
@@ -83,6 +85,8 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
+
+app.include_router(auth_router.router)
 
 # ========================================
 # Health Check Endpoint
