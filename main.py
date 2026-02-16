@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from routers import auth_router
+from routers import auth_router, user_router
 
 import time
 
@@ -87,25 +87,11 @@ app.add_middleware(
 )
 
 app.include_router(auth_router.router)
+app.include_router(user_router.router)
 
 # ========================================
 # Health Check Endpoint
 # ========================================
-@app.get(
-    "/",
-    tags=["Health"],
-    summary="Root endpoint",
-    response_description="Application Up and Running...."
-)
-async def root():
-    return {
-        "message": "🚀 Python Auth Backend API",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "redoc": "/redoc",
-        "status": "running"
-    }
-
 @app.get(
     "/health",
     tags=["Health"],

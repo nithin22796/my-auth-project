@@ -162,15 +162,6 @@ async def refresh_token(token_data: TokenRefresh, db: Session = Depends(get_db))
         "token_type": "bearer",
     }
 
-@router.get(
-    "/current-user",
-    response_model=UserResponse,
-    summary="Get current user",
-    description="Get current user"
-)
-async def get_current_user(current_user: User = Depends(get_current_user)):
-    return current_user
-
 @router.post(
     "/logout",
     response_model=MessageResponse,
